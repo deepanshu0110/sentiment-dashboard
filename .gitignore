@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+
+# Streamlit/Build
+.streamlit/
+*.log
+
+# Data (keep the seed CSV, ignore generated)
+data/sentiment.csv
+data/*.parquet
+!data/sample_headlines.csv
+
+# OS/Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
