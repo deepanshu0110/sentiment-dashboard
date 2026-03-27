@@ -1,4 +1,4 @@
-# 📈 Crypto Market Sentiment Dashboard
+# Crypto Sentiment Dashboard
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?style=flat-square&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?style=flat-square&logo=fastapi)
@@ -6,94 +6,66 @@
 ![NLP](https://img.shields.io/badge/NLP-VADER-purple?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-Real-time dashboard analyzing cryptocurrency news & social media sentiment using FastAPI, Streamlit, and VADER Sentiment.
+Analyzes crypto news headlines in real time, scores sentiment using VADER, and displays live polarity trends via a Streamlit dashboard backed by FastAPI.
 
 ---
 
-## 🚀 Features
+## Business Problem
 
-- **FastAPI backend** → serves processed sentiment data (`/sentiment`, `/symbols`, `/summary`)
-- **Streamlit dashboard** → interactive charts & live refresh
-- **VADER Sentiment** → quick polarity scoring of crypto headlines
-- **Auto data refresh** → headlines shifted to today's date for testing
-- **Multiple coins** → BTC, ETH included by default (easy to extend)
+Crypto prices move on sentiment. Traders and analysts need a fast signal on whether market chatter is bullish or bearish — without reading hundreds of headlines manually.
 
 ---
 
-## 🛠️ Tech Stack
+## Architecture
 
-| Layer | Technology |
+```
+Headlines → VADER Scoring → FastAPI → Streamlit Dashboard
+```
+
+---
+
+## API Endpoints
+
+| Endpoint | Description |
 |---|---|
-| Backend API | FastAPI |
-| Dashboard UI | Streamlit |
-| Sentiment Engine | VADER Sentiment |
-| Visualization | Plotly |
-| Data Processing | Pandas |
+| `GET /health` | Status + record count |
+| `GET /symbols` | Available coins |
+| `GET /sentiment?symbol=BTC&window=60` | Last 60-min sentiment |
+| `GET /sentiment/summary` | Overall market polarity |
 
 ---
 
-## 📂 Project Structure
+## Quickstart
 
-```
-sentiment-dashboard/
-├── api/
-│   └── sentiment_api.py      # FastAPI backend
-├── app/
-│   └── dashboard.py          # Streamlit frontend
-├── data/
-│   ├── sample_headlines.csv  # Seed headlines (in repo)
-│   └── sentiment.csv         # Generated at runtime (gitignored)
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
----
-
-## ⚡ Quickstart
-
-### 1️⃣ Clone & install
 ```bash
 git clone https://github.com/deepanshu0110/sentiment-dashboard.git
 cd sentiment-dashboard
 pip install -r requirements.txt
+uvicorn api.sentiment_api:app --reload --port 8000   # Terminal 1
+streamlit run app/dashboard.py --server.port 8501    # Terminal 2
 ```
-
-### 2️⃣ Run the API
-```bash
-uvicorn api.sentiment_api:app --reload --port 8000
-```
-API: http://localhost:8000 | Swagger: http://localhost:8000/docs
-
-### 3️⃣ Run the Dashboard
-```bash
-streamlit run app/dashboard.py --server.port 8501
-```
-Dashboard: http://localhost:8501
 
 ---
 
-## 🔑 API Endpoints
+## Tech Stack
 
-| Endpoint | Description |
-|---|---|
-| `GET /health` | API health + record count |
-| `GET /symbols` | Available coins (BTC, ETH) |
-| `GET /sentiment?symbol=BTC&window=60` | Sentiment data (last 60 min) |
-| `GET /sentiment/summary` | Overall market sentiment |
+Python · VADER Sentiment · FastAPI · Streamlit · Plotly · Pandas
 
 ---
 
-## 🧩 Roadmap
+## Roadmap
 
-- [x] BTC & ETH demo with sample data
-- [ ] Add more coins (SOL, BNB, XRP)
-- [ ] Live news API integration (NewsAPI / CryptoPanic)
-- [ ] WebSocket real-time updates
+- [ ] Live NewsAPI / CryptoPanic integration
+- [ ] WebSocket real-time push
+- [ ] Expand to SOL, BNB, XRP
 - [ ] Docker deployment
 
 ---
 
-## 📄 License
+## Author
 
-MIT License — see [LICENSE](LICENSE) for details.
+**Deepanshu Garg** — Freelance Data Scientist
+- GitHub: [@deepanshu0110](https://github.com/deepanshu0110)
+- Hire: [freelancer.com/u/deepanshu0110](https://www.freelancer.com/u/deepanshu0110)
+
+MIT License
