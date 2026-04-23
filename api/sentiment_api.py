@@ -9,6 +9,18 @@ import pandas as pd
 import os
 from datetime import datetime, timedelta, date
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from contextlib import asynccontextmanager
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Load data on startup — modern FastAPI lifecycle hook."""
+    ok = load_and_process_data()
+    if ok:
+        print("✅ API initialized successfully")
+    else:
+        print("⚠️ Warning: Could not load all data")
+    yield
 
 # -------------------------------
 # Initialize
@@ -167,16 +179,7 @@ def get_sentiment_label(score: float) -> str:
 # -------------------------------
 # Startup
 # -------------------------------
-from contextlib import asynccontextmanager
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    ok = load_and_process_data()
-    if ok:
-        print("✅ API initialized successfully")
-    else:
-        print("⚠️ Warning: Could not load all data")
-    yield
 
 # -------------------------------
 # Endpoints
