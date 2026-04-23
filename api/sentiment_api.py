@@ -16,7 +16,8 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 app = FastAPI(
     title="Market Sentiment API",
     description="API for cryptocurrency market sentiment analysis",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -166,13 +167,16 @@ def get_sentiment_label(score: float) -> str:
 # -------------------------------
 # Startup
 # -------------------------------
-@app.on_event("startup")
-async def startup_event():
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     ok = load_and_process_data()
     if ok:
         print("✅ API initialized successfully")
     else:
         print("⚠️ Warning: Could not load all data")
+    yield
 
 # -------------------------------
 # Endpoints
