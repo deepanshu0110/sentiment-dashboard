@@ -10,7 +10,7 @@
 
 Scores crypto news headlines with VADER and shows sentiment trends per coin in a Streamlit dashboard backed by FastAPI.
 
-**Current data:** the API reads a small sample file (`data/sample_headlines.csv`). Live news ingestion is on the roadmap, not built yet.
+**Current data:** the API reads 7 sample headlines (`data/sample_headlines.csv`). On startup it shifts their timestamps to today so the time-window endpoints return data. Live news ingestion is on the roadmap, not built yet.
 
 ---
 
