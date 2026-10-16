@@ -51,6 +51,17 @@ streamlit run app/dashboard.py --server.port 8501    # Terminal 2
 
 ---
 
+## Tests
+
+```bash
+pip install pytest
+pytest tests/ -v
+```
+
+The tests starts the API and checks `/health`, `/symbols`, `/sentiment` and `/sentiment/summary`. GitHub Actions runs them on every push.
+
+---
+
 ## Tech Stack
 
 Python · VADER Sentiment · FastAPI · Streamlit · Plotly · Pandas
