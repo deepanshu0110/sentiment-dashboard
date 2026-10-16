@@ -8,7 +8,9 @@
 ![NLP](https://img.shields.io/badge/NLP-VADER-purple?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-Analyzes crypto news headlines in real time, scores sentiment using VADER, and displays live polarity trends via a Streamlit dashboard backed by FastAPI.
+Scores crypto news headlines with VADER and shows sentiment trends per coin in a Streamlit dashboard backed by FastAPI.
+
+**Current data:** the API reads a small sample file (`data/sample_headlines.csv`). Live news ingestion is on the roadmap, not built yet.
 
 ---
 
